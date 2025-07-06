@@ -207,6 +207,15 @@ def main():
         mods_str = input_results[4]
         vul_res_crit = input_results[5]
         dice_input_str = input_results[6]
+
+        # this matches the dice_input_str for patterns with multiple dice rolls, e.g. 5d6+10d8
+        fancy_pattern = re.compile(r"((\d+)?d(\d+|%)([ad])?([+\-*/])?(\d+)?([vrc]*)?)(\s*\+\s*((\d+)?d(\d+|%)([ad])?([+\-*/])?(\d+)?([vrc]*)?))+")
+        if re.fullmatch(fancy_pattern, dice_input_str):
+            print("Rolling multiple dice at at time is a work-in-progress feature\n")
+            continue
+        else:
+            whitespace_ = "\n"
+
         if how_many_dice_str is None:
             how_many_dice_str = "1"
         if dice_type_str is None:
@@ -216,14 +225,20 @@ def main():
             mods_str = 0
         # calls first dice roll
         how_many_dice = int(how_many_dice_str)
+        if how_many_dice > 1000:
+            print("That can't possibly be a real d&d roll, please roll again\n")
+            continue
         dice_type = int(dice_type_str)
+        if dice_type > 150:
+            print("That's not a real dnd dice, please roll again\n")
+            continue
         roll_output = dice_roller(how_many_dice, dice_type)
         sum_of_output = roll_output[0]
         list_of_rolls = roll_output[1]
         # calls advantage and disadvantage stuff next
         second_stage = advantage_disadvantage(sum_of_output, how_many_dice, dice_type, adv_dis)
         if second_stage == "error":
-            print("Advantage/Disadvantage only applies to d20 rolls")
+            print("Advantage/Disadvantage only applies to d20 rolls\n")
             error_func()
             continue
         second_stage_winner = second_stage[0]
@@ -246,11 +261,14 @@ def main():
                 error_func()
                 continue
         print("\nYou rolled:", dice_input_str)
-        if adv_dis is not None:
-            print("Raw rolls:", vantage_rolls)
+        if how_many_dice > 25:
+            print("That's too many raw dice to display, results will display as normal\n")
         else:
-            print("Raw rolls:", list_of_rolls)
-        print("Final Result:", final_result, "\n")
+            if adv_dis is not None:
+                print("Raw rolls:", vantage_rolls)
+            else:
+                print("Raw rolls:", list_of_rolls)
+            print("Final Result:", final_result, "\n")
         if adv_dis is not None:
             add_to_history(dice_input_str, vantage_rolls, final_result)
         else:
