@@ -207,15 +207,6 @@ def main():
         mods_str = input_results[4]
         vul_res_crit = input_results[5]
         dice_input_str = input_results[6]
-
-        # this matches the dice_input_str for patterns with multiple dice rolls, e.g. 5d6+10d8
-        fancy_pattern = re.compile(r"((\d+)?d(\d+|%)([ad])?([+\-*/])?(\d+)?([vrc]*)?)(\s*\+\s*((\d+)?d(\d+|%)([ad])?([+\-*/])?(\d+)?([vrc]*)?))+")
-        if re.fullmatch(fancy_pattern, dice_input_str):
-            print("Rolling multiple dice at at time is a work-in-progress feature\n")
-            continue
-        else:
-            whitespace_ = "\n"
-
         if how_many_dice_str is None:
             how_many_dice_str = "1"
         if dice_type_str is None:
