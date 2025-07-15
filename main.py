@@ -37,7 +37,6 @@ def add_to_history(user_input, raw_dice_rolls, final_result):
 
 def display_history():
     # displays the last 10 rolls, thinking a list system?
-    # you should be able to clear the previous rolls interdependently of the on-screen stuff
     if not roll_history:
         print("You haven't rolled anything this session, you should get to that\n")
     else:
