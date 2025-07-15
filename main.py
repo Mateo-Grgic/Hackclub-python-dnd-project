@@ -184,7 +184,7 @@ def vulner_resist_critical(modded_output, vul_res_crit, how_many_dice, dice_type
 def main():
     # main function
     print("Welcome to the dice roller")
-    print(f"Type 'exit' or 'help', to get their respective actions\n")
+    print(f"Type 'exit', 'history, or 'help', to get their respective actions\n")
     while True:
         input_results = input_func()
         if input_results == "failed":
