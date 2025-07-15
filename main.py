@@ -68,7 +68,6 @@ def help_func():
             print("~~~")
             print("This program supports several commands, including:")
             print("<help> - you know what this does, and how you got here presumably")
-            print("<clear> - clear history & screen")
             print("<history> - print last 10 rolls")
             print("<exit> - exit whatever program you're in")
             print("~~~")
