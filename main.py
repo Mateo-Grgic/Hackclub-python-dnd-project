@@ -5,6 +5,7 @@
 # help, manual, error handling
 # critical hits
 # re-roll mechanics?
+# humor?
 # gtk4 ui eventually
 
 import random
